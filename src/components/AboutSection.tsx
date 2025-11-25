@@ -74,11 +74,9 @@ const AboutSection: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-bold">About the Creator</h2>
         </div>
         <p className="text-blue-50 text-sm sm:text-base md:text-lg leading-relaxed">
-          I'm a developer passionate about cybersecurity and helping people stay
-          safe online. This project combines my technical skills with my desire
-          to make the internet a safer place for everyone. I believe that
-          everyone deserves access to tools that can help protect them from
-          digital threats, which is why this tool is completely free to use.
+         Hi, I’m Hassan Anwar—a developer with a strong passion for data, and building tools that make people’s digital lives safer. 
+          I created SpamShield because I’ve seen how easily someone can fall victim to phishing emails, fake alerts, and cleverly disguised scams. 
+          Even tech-savvy people get fooled sometimes.
         </p>
         <p className="text-blue-50 mt-3 sm:mt-4 text-sm sm:text-base">
           If you have suggestions for improvements or found this tool helpful,
