@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/// File: src/components/EmailChecker.tsx
+import React, { useState } from 'react';
 import { AlertTriangle, CheckCircle, Mail } from 'lucide-react';
 
 interface AnalysisResult {
@@ -7,7 +8,7 @@ interface AnalysisResult {
   reasons: string[];
 }
 
-function EmailChecker() {
+const EmailChecker: React.FC = () => {
   const [emailContent, setEmailContent] = useState('');
   const [senderEmail, setSenderEmail] = useState('');
   const [subject, setSubject] = useState('');
@@ -25,13 +26,29 @@ function EmailChecker() {
       const subjectLower = subject.toLowerCase();
 
       const spamKeywords = [
-        'congratulations', 'winner', 'claim', 'prize', 'urgent', 'act now',
-        'limited time', 'click here', 'verify account', 'suspended', 'confirm',
-        'free money', 'inheritance', 'nigerian prince', 'bitcoin', 'cryptocurrency',
-        'weight loss', 'viagra', 'casino', 'loan approved'
+        'congratulations',
+        'winner',
+        'claim',
+        'prize',
+        'urgent',
+        'act now',
+        'limited time',
+        'click here',
+        'verify account',
+        'suspended',
+        'confirm',
+        'free money',
+        'inheritance',
+        'nigerian prince',
+        'bitcoin',
+        'cryptocurrency',
+        'weight loss',
+        'viagra',
+        'casino',
+        'loan approved',
       ];
 
-      spamKeywords.forEach(keyword => {
+      spamKeywords.forEach((keyword) => {
         if (content.includes(keyword) || subjectLower.includes(keyword)) {
           spamScore += 15;
           reasons.push(`Contains suspicious keyword: "${keyword}"`);
@@ -86,7 +103,7 @@ function EmailChecker() {
       setResult({
         isSpam,
         score: Math.min(spamScore, 100),
-        reasons
+        reasons,
       });
 
       setIsAnalyzing(false);
@@ -102,13 +119,17 @@ function EmailChecker() {
 
   return (
     <div className="space-y-8">
+      {/* Form Section */}
       <div className="bg-white rounded-xl shadow-lg p-8">
         <div className="flex items-center gap-3 mb-6">
           <Mail className="w-6 h-6 text-blue-600" />
-          <h2 className="text-2xl font-bold text-slate-900">Analyze Your Email</h2>
+          <h2 className="text-2xl font-bold text-slate-900">
+            Analyze Your Email
+          </h2>
         </div>
 
         <div className="space-y-6">
+          {/* Sender Email */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Sender Email Address
@@ -122,6 +143,7 @@ function EmailChecker() {
             />
           </div>
 
+          {/* Subject */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Email Subject
@@ -135,6 +157,7 @@ function EmailChecker() {
             />
           </div>
 
+          {/* Email Content */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Email Content
@@ -148,6 +171,7 @@ function EmailChecker() {
             />
           </div>
 
+          {/* Buttons */}
           <div className="flex gap-4">
             <button
               onClick={analyzeEmail}
@@ -166,10 +190,13 @@ function EmailChecker() {
         </div>
       </div>
 
+      {/* Result Section */}
       {result && (
-        <div className={`bg-white rounded-xl shadow-lg p-8 border-l-4 ${
-          result.isSpam ? 'border-red-500' : 'border-green-500'
-        }`}>
+        <div
+          className={`bg-white rounded-xl shadow-lg p-8 border-l-4 ${
+            result.isSpam ? 'border-red-500' : 'border-green-500'
+          }`}
+        >
           <div className="flex items-start gap-4 mb-6">
             {result.isSpam ? (
               <AlertTriangle className="w-8 h-8 text-red-500 flex-shrink-0" />
@@ -177,22 +204,30 @@ function EmailChecker() {
               <CheckCircle className="w-8 h-8 text-green-500 flex-shrink-0" />
             )}
             <div className="flex-1">
-              <h3 className={`text-2xl font-bold mb-2 ${
-                result.isSpam ? 'text-red-600' : 'text-green-600'
-              }`}>
+              <h3
+                className={`text-2xl font-bold mb-2 ${
+                  result.isSpam ? 'text-red-600' : 'text-green-600'
+                }`}
+              >
                 {result.isSpam ? 'Likely SPAM' : 'Appears Legitimate'}
               </h3>
               <p className="text-slate-600">
-                Spam confidence score: <span className="font-semibold">{result.score}%</span>
+                Spam confidence score:{' '}
+                <span className="font-semibold">{result.score}%</span>
               </p>
             </div>
           </div>
 
           <div className="bg-slate-50 rounded-lg p-6">
-            <h4 className="font-semibold text-slate-900 mb-3">Analysis Details:</h4>
+            <h4 className="font-semibold text-slate-900 mb-3">
+              Analysis Details:
+            </h4>
             <ul className="space-y-2">
               {result.reasons.map((reason, index) => (
-                <li key={index} className="flex items-start gap-2 text-slate-700">
+                <li
+                  key={index}
+                  className="flex items-start gap-2 text-slate-700"
+                >
                   <span className="text-blue-600 mt-1">•</span>
                   <span>{reason}</span>
                 </li>
@@ -203,8 +238,9 @@ function EmailChecker() {
           {result.isSpam && (
             <div className="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
               <p className="text-sm text-red-800">
-                <strong>Warning:</strong> Do not click any links, download attachments, or share personal information.
-                Mark this email as spam and delete it immediately.
+                <strong>Warning:</strong> Do not click any links, download
+                attachments, or share personal information. Mark this email as
+                spam and delete it immediately.
               </p>
             </div>
           )}
@@ -212,6 +248,6 @@ function EmailChecker() {
       )}
     </div>
   );
-}
+};
 
 export default EmailChecker;
